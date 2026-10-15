@@ -27,12 +27,26 @@ def disegna_griglia(griglia: list[list[str]]) -> None:
 
 def chiedi_colonna(giocatore: str) -> int:
     """Chiede la colonna finché non viene inserito un numero valido."""
-    pass
+    while True:
+        scelta = input(f"Giocatore {giocatore}, scegli la colonna (1-{COLONNE}): ").strip()
+        if not scelta.isdigit():
+            print(f"  {scelta} non è un numero: serve una colonna da 1 a {COLONNE}.")
+            continue
+        colonna = int(scelta)
+        if colonna < 1 or colonna > COLONNE:
+            print(f"  Colonna {colonna} fuori range: serve da 1 a {COLONNE}.")
+            continue
+        return colonna
 
 
 def inserisci_gettone(griglia: list[list[str]], colonna: int, giocatore: str) -> int:
     """Posiziona il gettone e restituisce la riga, oppure -1 se la colonna è piena."""
-    pass
+    c = colonna - 1
+    for r in range(RIGHE - 1, -1, -1):
+        if griglia[r][c] == " ":
+            griglia[r][c] = giocatore
+            return r
+    return -1
 
 
 def controlla_vittoria(
