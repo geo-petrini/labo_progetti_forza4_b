@@ -53,7 +53,21 @@ def controlla_vittoria(
     griglia: list[list[str]], giocatore: str, riga: int, colonna: int
 ) -> bool:
     """True se la pedina appena posizionata completa quattro in fila."""
-    pass
+
+    def presa(r: int, c: int) -> bool:
+        return 0 <= r < RIGHE and 0 <= c < COLONNE and griglia[r][c] == giocatore
+
+    for dr, dc in ((0, 1), (1, 0), (1, 1), (1, -1)):
+        conteggio = 1
+        for passo in (1, -1):
+            r, c = riga + dr * passo, colonna + dc * passo
+            while presa(r, c):
+                conteggio += 1
+                r += dr * passo
+                c += dc * passo
+        if conteggio >= 4:
+            return True
+    return False
 
 
 def conta_spazi(griglia: list[list[str]]) -> int:
