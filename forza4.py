@@ -58,5 +58,5 @@ def controlla_vittoria(
 
 def conta_spazi(griglia: list[list[str]]) -> int:
     """Quante celle della griglia sono ancora vuote."""
-    pass
+    return sum(cella == " " for riga in griglia for cella in riga)
 
