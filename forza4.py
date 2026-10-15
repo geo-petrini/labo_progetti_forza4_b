@@ -6,12 +6,23 @@ COLONNE = 7
 
 def nuova_griglia() -> list[list[str]]:
     """Crea una griglia vuota di 6 righe e 7 colonne."""
-    pass
+    return [[" " for _ in range(COLONNE)] for _ in range(RIGHE)]
 
 
 def disegna_griglia(griglia: list[list[str]]) -> None:
     """Stampa la griglia con le colonne numerate da 1 a 7."""
-    pass
+    bordo_sup    =  " ┌" + "┬".join(["───"] * COLONNE) + "┐"
+    bordo_interno = " ├" + "┼".join(["───"] * COLONNE) + "┤"
+    bordo_inf    =  " └" + "┴".join(["───"] * COLONNE) + "┘"
+    print()
+    print("  " + "   ".join(str(n) for n in range(1, COLONNE + 1)))
+    print(bordo_sup)
+    for i, riga in enumerate(griglia):
+        print(" │" + "│".join(f" {c} " for c in riga) + "│")
+        if i < len(griglia) -1:
+            print(bordo_interno)
+    print(bordo_inf)
+    print()
 
 
 def chiedi_colonna(giocatore: str) -> int:
